@@ -22,16 +22,19 @@ The optimal parking layout depends on the condition of the land, especially the 
 
 We will give you predefined "space"(corresponds to land) and "patch"(corresponds to parking space).  
 Your task is to fill the space with maximum number of patches.  
-To fill the space, you can rotate and translate patches.
+To fill the space, you can rotate and translate patches.  
 A patch have to be placed within the space, and cannot overlap other patches.
 
 <h3>Given</h3>
-- Space to fill
-- Patch to place
+- Space to fill  
+- Patch to place  
 
 <h3>Goal</h3>
-- Fill the space with maximum number of patches
-- The number of trial have to be minimized at inference time
+- Fill the space with maximum number of patches  
+- The number of trial have to be minimized at inference time  
+
+<h3>Action</h3>
+- Patch rotation and translation
 
 <h3>Constraints</h3>
 - Patch have to be placed within the space
@@ -72,8 +75,13 @@ env = PolygonFillEnv()
 <h3>Methods</h3>
 
 `env.select_space(index)`
+- Select the space from predefined spaces with index
+
 `env.step(patch_x, patch_y, patch_angle)`
+- Apply action
+
 `env.reset()`
+- Reset environment
 
 With the code below, you can check how the environment works
 
