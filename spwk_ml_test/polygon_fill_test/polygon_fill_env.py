@@ -13,17 +13,26 @@ class PolygonFillEnv():
     def __init__(self):
         self.__spaces = []
         self.__placed_patches = []
-        self.add_space_coords([-10,10,10,-10],[-10,-10,10,10])
-        self.__sample_index = 0
         self.__patch = self.coords_to_polygon([-2.5,2.5,2.5,-2.5], [-1.15,-1.15,1.15,1.15])
-        self.reset()
+        self.add_space_coords([-10,10,10,-10],[-10,-10,10,10])
         self.add_space_samples()
+        self.__sample_index = 0
+        self.__n_step = 0
         self.__new_patch = geometry.Polygon()
+        
+        self.reset()
+        
+        
+        
 
     @property
     def spaces(self):
         return [{'shell':np.array(space.exterior), 'holes':[np.array(interior) for interior in space.interiors]} for space in self.__spaces]
             
+    @property
+    def n_step(self):
+        return self.__n_step
+    
     @property
     def __placed_patches_mp(self):
         return geometry.MultiPolygon(self.__placed_patches)
@@ -68,6 +77,8 @@ class PolygonFillEnv():
 
     def reset(self):
         self.__placed_patches = []
+        self.__n_step = 0
+        self.__new_patch = geometry.Polygon()
 
     def coords_to_polygon(self, x_coords, y_coords):
         try:
@@ -135,9 +146,12 @@ class PolygonFillEnv():
 
         if is_valid:
             self.__placed_patches.append(self.__new_patch)
+
+        self.__n_step += 1
         
         return {
             'is_valid': is_valid,
+            'n_step': self.n_step,
             'n_patches': len(self.placed_patches),
             'space': self.space,
             'selected_patch': self.new_patch,
