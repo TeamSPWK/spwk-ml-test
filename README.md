@@ -25,4 +25,4 @@ pip install git+https://github.com/TeamSPWK/spwk-ml-test.git
 <h2 align="center">Get started</h2>
 
 Detailed instructions are on individual instruction pages.
-- <a href="./polygon_fill_test/instruction.md">Polygon Fill Test</a>
+- <a href="./documents/polygon_fill_instruction.md">Polygon Fill Test</a>

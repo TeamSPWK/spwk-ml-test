@@ -26,17 +26,21 @@ To fill the space, you can rotate and translate patches.
 A patch have to be placed within the space, and cannot overlap other patches.
 
 <h3>Given</h3>
+
 - Space to fill  
 - Patch to place  
 
 <h3>Goal</h3>
+
 - Fill the space with maximum number of patches  
 - The number of trial have to be minimized at inference time  
 
 <h3>Action</h3>
+
 - Patch rotation and translation
 
 <h3>Constraints</h3>
+
 - Patch have to be placed within the space
 - Patch cannot overlap other patches
 
