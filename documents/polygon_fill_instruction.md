@@ -87,6 +87,15 @@ env = PolygonFillEnv()
 `env.reset()`
 - Reset environment
 
+`env.render(save_img=False, path=None, fname=None, show_last=True, show_axis=True)`
+- Render current state. With adjusting its args, you can use image feature for training.
+    - args
+        - `save_img` : Whether or not save the image as file.
+        - `path` : Path to save image. If `save_img` is False, it's meaningless. Default path is `./imgs` (when `path` is None).
+        - `fname` : File name to save image. If save_img is False, it's meaningless. Default name is `img_i.png`, and `i` is growing integer (when `fname` is None).
+        - `show_last` : Whether or not color the last patch. If true, last patch is colored by translucent red.
+        - `show_axis` : Whether or not plot the axis.
+
 With the code below, you can check how the environment works
 
 First, with `env.spaces` property, you can get information of predefined spaces.  
