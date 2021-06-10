@@ -7,6 +7,36 @@
 
 <h2 align="center">Problem Definition</h2>
 
+Spacewalk is a company that discovers the value of space.  
+In order to discover the value of space, it's important to make a plan for space.  
+There two method to make a plan for space, division and filling.  
+  
+For parking lot planning, filling is suitable method.  
+You will solve the simplified version of paking lot planning.  
+(with no legal constraints!)  
+
+Suppose there are a piece of land, and we are planning to make a parking lot.  
+In order to maximize the value of the land, it's crucial to make a parking layout of maximum number of parking spaces.  
+
+The optimal parking layout depends on the condition of the land, especially the shape of the land.
+
+We will give you predefined "space"(corresponds to land) and "patch"(corresponds to parking space).  
+Your task is to fill the space with maximum number of patches.  
+To fill the space, you can rotate and translate patches.
+A patch have to be placed within the space, and cannot overlap other patches.
+
+<h3>Given</h3>
+- Space to fill
+- Patch to place
+
+<h3>Goal</h3>
+- Fill the space with maximum number of patches
+- The number of trial have to be minimized at inference time
+
+<h3>Constraints</h3>
+- Patch have to be placed within the space
+- Patch cannot overlap other patches
+
 <h2 align="center">Manual</h2>
 
 `spwkml` package offers environment class for problem definition above.  
@@ -20,7 +50,7 @@ env = PolygonFillEnv()
 
 `PolygonFillEnv` class has several properties and methods.
 
-Properties
+<h3>Properties</h3>
 
 `env.spaces`
 - Space samples to place patches. 
@@ -39,7 +69,7 @@ Properties
 `env.placed_patches`
 - list containing coordinate array of placed patches
 
-Methods
+<h3>Methods</h3>
 
 `env.select_space(index)`
 `env.step(patch_x, patch_y, patch_angle)`
@@ -172,7 +202,7 @@ print(env.space)
 }
 ```
 
-You can get fixed patch information with `env.patch` property.
+You can get fixed patch information with `env.patch` property.  
 This is unit patch, and when you apply action, this patch will be rotated, and translated.
 ```python
 print(env.patch)
@@ -193,7 +223,7 @@ for i in range(len(env.spaces)):
     env.render()
 ```
 
-You will apply some actions with `env.step()` method and see the result of it.
+You will apply some actions with `env.step()` method and see the result of it.  
 5th predifined space is good to know how it works, so, choose 5th space.  
 It's diamond shape space with a hole in center.
 ```python
