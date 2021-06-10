@@ -1,3 +1,4 @@
+import os
 import numpy as np
 from shapely import geometry, ops, affinity
 from matplotlib import pyplot as plt
@@ -145,11 +146,13 @@ class PolygonFillEnv():
             'area_intersect_patches': area_intersect_patches
         }
 
-    def render(self):
+    def render(self, save_img=False, path=None, fname=None, show_axis=True):
         figure = plt.figure()
         plt.gca().set_aspect('equal')
         plt.xlim(-10,10)
         plt.ylim(-10,10)
+        if not show_axis:
+            plt.axis('off')
         plt.fill(*self.__space.exterior.coords.xy, color='yellow')
         for interior in self.__space.interiors:
             plt.fill(*interior.coords.xy, color='white')
@@ -157,4 +160,16 @@ class PolygonFillEnv():
             plt.fill(*placed_patch.exterior.coords.xy, color='green')
         if not self.__new_patch.is_empty:
             plt.fill(*self.__new_patch.exterior.coords.xy, color='red', alpha=0.3)
-        plt.show()
+        if save_img:
+            if not path:
+                path = './imgs'
+            if not fname:
+                i = 0
+                while(os.path.exists(os.path.join(path, 'img_{}.png'.format(i)))):
+                    i+=1
+                fname = 'img_{}.png'.format(i)
+            os.makedirs(path, exist_ok=True)
+            plt.savefig(os.path.join(path, fname))
+        else:
+            plt.show()
+        plt.close()
