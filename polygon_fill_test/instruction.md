@@ -52,6 +52,7 @@ There are 10 predefined spaces.
 
 ```python
 print(env.spaces)
+
 [
     {
         'shell': array([[-10., -10.],
@@ -158,8 +159,9 @@ print(env.spaces)
 
 One of predefined spaces is selected as current space, and you can get this by `env.space` property.  
 As default, first space (space of index 0) is selected as current space.  
-```
+```python
 print(env.space)
+
 {
     'shell': array([[-10., -10.],
                     [ 10., -10.],
@@ -172,8 +174,9 @@ print(env.space)
 
 You can get fixed patch information with `env.patch` property.
 This is unit patch, and when you apply action, this patch will be rotated, and translated.
-```
+```python
 print(env.patch)
+
 array([[-2.5 , -1.15],
        [ 2.5 , -1.15],
        [ 2.5 ,  1.15],
@@ -183,7 +186,7 @@ array([[-2.5 , -1.15],
 
 In order to know the shape of predefined spaces, you can use `env.select_space(index)` method and `env.render` method.  
 There are 10 predefined spaces, so you can use index 0~9 without adding other spaces.
-```
+```python
 for i in range(len(env.spaces)):
     env.select_space(i)
     print(env.space)
@@ -193,15 +196,17 @@ for i in range(len(env.spaces)):
 You will apply some actions with `env.step()` method and see the result of it.
 5th predifined space is good to know how it works, so, choose 5th space.  
 It's diamond shape space with a hole in center.
-```
+```python
 env.select_space(5)
 env.render()
 ```
+<img src="https://user-images.githubusercontent.com/39043516/121534337-17bc5880-ca3c-11eb-99a2-d1d4dba5f66c.png" alt="render" />
 
-
-
-```
+```python
 state = env.step(0,0,0)
+print(state)
+env.render()
+
 {
     'is_valid': False, 
     'n_patches': 0, 
@@ -229,9 +234,13 @@ state = env.step(0,0,0)
     'area_intersect_patches': 0.0
 }
 ```
+<img src="https://user-images.githubusercontent.com/39043516/121534557-49352400-ca3c-11eb-9c29-6f9df338b57f.png" alt="render" />
 
-```
+```python
 state = env.step(4,4,0)
+print(state)
+env.render()
+
 {
     'is_valid': False, 
     'n_patches': 0, 
@@ -259,9 +268,13 @@ state = env.step(4,4,0)
     'area_intersect_patches': 0.0
 }
 ```
+<img src="https://user-images.githubusercontent.com/39043516/121534600-53efb900-ca3c-11eb-987f-47aed3a690a1.png" alt="render" />
 
-```
+```python
 state = env.step(4,4,-0.8)
+print(state)
+env.render()
+
 {
     'is_valid': True, 
     'n_patches': 1, 
@@ -295,9 +308,13 @@ state = env.step(4,4,-0.8)
     'area_intersect_patches': 0.0
 }
 ```
+<img src="https://user-images.githubusercontent.com/39043516/121534679-6669f280-ca3c-11eb-9ede-ac5ae2ed156a.png" alt="render" />
 
-```
+```python
 state = env.step(-2,-6,-0.8)
+print(state)
+env.render()
+
 {
     'is_valid': True, 
     'n_patches': 2, 
@@ -336,9 +353,13 @@ state = env.step(-2,-6,-0.8)
     'area_intersect_patches': 0.0
 }
 ```
+<img src="https://user-images.githubusercontent.com/39043516/121534739-74b80e80-ca3c-11eb-94fc-d1572c0a2f0e.png" alt="render" />
 
-```
+```python
 state = env.step(-4,-4,-0.8)
+print(state)
+env.render()
+
 {
     'is_valid': False, 
     'n_patches': 2, 
@@ -377,9 +398,13 @@ state = env.step(-4,-4,-0.8)
     'area_intersect_patches': 4.905615392546818
 }
 ```
+<img src="https://user-images.githubusercontent.com/39043516/121534763-7b468600-ca3c-11eb-96f4-51238e868629.png" alt="render" />
 
-```
+```python
 state = env.step(-6,-2,-0.8)
+print(state)
+env.render()
+
 {
     'is_valid': True, 
     'n_patches': 3, 
@@ -423,3 +448,4 @@ state = env.step(-6,-2,-0.8)
     'area_intersect_patches': 0.0
 }
 ```
+<img src="https://user-images.githubusercontent.com/39043516/121534798-84cfee00-ca3c-11eb-9e1d-41d8ca4c717c.png" alt="render" />
