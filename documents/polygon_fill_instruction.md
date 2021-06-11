@@ -1,11 +1,11 @@
 <h1 align="center">Polygon Fill Test</h1>
 
 <p align="center">
-  <a href="#problem-definition">Problem Definition</a> •
+  <a href="#problem-description">Problem Description</a> •
   <a href="#manual">Manual</a>
 </p>
 
-<h2 align="center">Problem Definition</h2>
+<h2 align="center">Problem Description</h2>
 
 Spacewalk is a company that discovers the value of space.  
 In order to discover the value of space, it's important to make a plan for space.  
@@ -30,19 +30,39 @@ A patch have to be placed within the space, and cannot overlap other patches.
 - Space to fill  
 - Patch to place  
 
-<h3>Goal</h3>
-
-- Fill the space with maximum number of patches  
-- The number of trial have to be minimized at inference time  
-
 <h3>Action</h3>
 
 - Patch rotation and translation
+
+<h3>Goal</h3>
+
+- Fill the target spaces with maximum number of patches  
+    - Target spaces are given predefined spaces (There are 9 predefined spaces)
+- The number of trial have to be minimized at inference time  
 
 <h3>Constraints</h3>
 
 - Patch have to be placed within the space
 - Patch cannot overlap other patches
+
+<h3>Allowed</h3>
+
+- You can wrap the given environment with your custom environment
+    - Given environment provides minimal information to solve the problem
+    - You can create a wrapper environment to generate additional information
+    - If you create a wrapper environment, you have to submit that as well
+
+<h3>Restricted</h3>
+
+- You have to solve the problem with just one agent
+    - Using different agents for different spaces is prohibited
+
+<h3>Recommended</h3>
+
+- Generalized agent is recommended
+    - There are additional test spaces that we do not offer to applicants
+    - Good performance on those is not mandatory, but recommended
+    - Extra points will given for performance on those test set
 
 <h2 align="center">Manual</h2>
 
@@ -60,8 +80,9 @@ env = PolygonFillEnv()
 <h3>Properties</h3>
 
 `env.spaces`
-- Space samples to place patches. 
+- Space samples to place patches  
 - It consists of several spaces
+- Our canvas bound is (-10, -10, 10, 10)
 
 `env.space`
 - dictionary of two items
@@ -83,9 +104,22 @@ env = PolygonFillEnv()
 
 `env.step(patch_x, patch_y, patch_angle)`
 - Apply action
+    - args
+        - `patch_x (float)` : The centroid x position of patch. The range is -10 to 10
+        - `patch_x (float)` : The centroid y position of patch. The range is -10 to 10
+        - `patch_x (float)` : The rotation of patch. The range is -pi/2 to pi/2. (unit:radian)
 
 `env.reset()`
 - Reset environment
+
+`env.render(save_img=False, path=None, fname=None, show_last=True, show_axis=True)`
+- Render current state. With adjusting its args, you can use image feature for training.
+    - args
+        - `save_img (bool)` : Whether or not save the image as file.
+        - `path (str)` : Path to save image. If `save_img` is False, it's meaningless. Default path is `./imgs` (when `path` is None).
+        - `fname (str)` : File name to save image. If save_img is False, it's meaningless. Default name is `img_i.png`, and `i` is growing integer (when `fname` is None).
+        - `show_last (bool)` : Whether or not color the last patch. If true, last patch is colored by translucent red.
+        - `show_axis (bool` : Whether or not plot the axis.
 
 With the code below, you can check how the environment works
 

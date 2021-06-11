@@ -160,7 +160,7 @@ class PolygonFillEnv():
             'area_intersect_patches': area_intersect_patches
         }
 
-    def render(self, save_img=False, path=None, fname=None, show_axis=True):
+    def render(self, save_img=False, path=None, fname=None, show_last=True, show_axis=True):
         figure = plt.figure()
         plt.gca().set_aspect('equal')
         plt.xlim(-10,10)
@@ -172,7 +172,7 @@ class PolygonFillEnv():
             plt.fill(*interior.coords.xy, color='white')
         for placed_patch in self.__placed_patches:
             plt.fill(*placed_patch.exterior.coords.xy, color='green')
-        if not self.__new_patch.is_empty:
+        if show_last and (not self.__new_patch.is_empty):
             plt.fill(*self.__new_patch.exterior.coords.xy, color='red', alpha=0.3)
         if save_img:
             if not path:
