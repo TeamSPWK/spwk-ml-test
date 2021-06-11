@@ -6,7 +6,7 @@ setup_requires = [
 install_requires = [
     "numpy==1.19.2",
     "shapely==1.7.1",
-    "matplotlib==3.3.4"
+    "matplotlib==3.2.1"
 ]
 setup(
     name = "spwkml",
