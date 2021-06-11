@@ -282,9 +282,9 @@ env.render()
 ```
 <img src="https://user-images.githubusercontent.com/39043516/121534337-17bc5880-ca3c-11eb-99a2-d1d4dba5f66c.png" alt="render" />
 
-Applying all zero action will cause the state below.
-Because the space has a hole on its center, the patch is out of space.
-So, it's not vaild and won't make any differences.
+Applying all zero action will cause the state below.  
+Because the space has a hole on its center, the patch is out of space.  
+So, it's not vaild and won't make any differences.  
 ```python
 state = env.step(0,0,0)
 print(state)
@@ -319,9 +319,9 @@ env.render()
 ```
 <img src="https://user-images.githubusercontent.com/39043516/121534557-49352400-ca3c-11eb-9c29-6f9df338b57f.png" alt="render" />
 
-Applying (4,4,0) action will cause the state below.
-The patch angle is not proper, and the patch is out of space.
-So, it's not vaild and won't make any differences.
+Applying (4,4,0) action will cause the state below.  
+The patch angle is not proper, and the patch is out of space.  
+So, it's not vaild and won't make any differences.  
 ```python
 state = env.step(4,4,0)
 print(state)
@@ -356,8 +356,8 @@ env.render()
 ```
 <img src="https://user-images.githubusercontent.com/39043516/121534600-53efb900-ca3c-11eb-987f-47aed3a690a1.png" alt="render" />
 
-Applying (4,4,-0.8) action will cause the state below.
-The patch is within the space, and it's placed.
+Applying (4,4,-0.8) action will cause the state below.  
+The patch is within the space, and it's placed.  
 ```python
 state = env.step(4,4,-0.8)
 print(state)
@@ -398,8 +398,8 @@ env.render()
 ```
 <img src="https://user-images.githubusercontent.com/39043516/121534679-6669f280-ca3c-11eb-9ede-ac5ae2ed156a.png" alt="render" />
 
-Applying (-2,-6,-0.8) action will cause the state below.
-The patch is within the space, and it's placed.
+Applying (-2,-6,-0.8) action will cause the state below.  
+The patch is within the space, and it's placed.  
 ```python
 state = env.step(-2,-6,-0.8)
 print(state)
@@ -445,9 +445,9 @@ env.render()
 ```
 <img src="https://user-images.githubusercontent.com/39043516/121534739-74b80e80-ca3c-11eb-94fc-d1572c0a2f0e.png" alt="render" />
 
-Applying (-4,-4,-0.8) action will cause the state below.
-The patch is within the space, but overlap other patch(-2,-6,-0.8 patch).
-So, it's not vaild and won't make any differences.
+Applying (-4,-4,-0.8) action will cause the state below.  
+The patch is within the space, but overlap other patch(-2,-6,-0.8 patch).  
+So, it's not vaild and won't make any differences.  
 ```python
 state = env.step(-4,-4,-0.8)
 print(state)
@@ -493,9 +493,9 @@ env.render()
 ```
 <img src="https://user-images.githubusercontent.com/39043516/121534763-7b468600-ca3c-11eb-96f4-51238e868629.png" alt="render" />
 
-Applying (-6,-2,-0.8) action will cause the state below.
-The patch is within the space, and doesn't touch any other patches.
-So, it's placed.
+Applying (-6,-2,-0.8) action will cause the state below.  
+The patch is within the space, and doesn't touch any other patches.  
+So, it's placed.  
 ```python
 state = env.step(-6,-2,-0.8)
 print(state)
