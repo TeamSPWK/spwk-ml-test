@@ -54,7 +54,7 @@ A patch have to be placed within the space, and cannot overlap other patches.
 
 <h3>Restricted</h3>
 
-- You have to solve the problem with just one agent
+- You have to solve the problem with just one generalized agent
     - Using different agents for different spaces is prohibited
 
 <h3>Recommended</h3>
@@ -82,20 +82,24 @@ env = PolygonFillEnv()
 `env.spaces`
 - Space samples to place patches  
 - It consists of several spaces
-- Our canvas bound is (-10, -10, 10, 10)
+- Canvas bound is (-10, -10, 10, 10), and you don't have to consider space out of bound 
 
 `env.space`
-- dictionary of two items
+- Dictionary of two items
     - shell : coordinate array of polygon shell
     - holes : list containing coordinate array of polygon hole
 
 `env.patch`
-- coordinate array of patch to fill space
-- fixed value
-- [[-2.5, -1.15], [2.5, -1.15], [2.5, 1.15], [-2.5, 1.15], [-2.5, -1.15]]
+- Coordinate array of base patch to fill space
+- Its centroid is on (0, 0)
+- The action will be placing the patch, rotated and translated from this base patch
+- Fixed value
+    - [[-2.5, -1.15], [2.5, -1.15], [2.5, 1.15], [-2.5, 1.15], [-2.5, -1.15]]
 
 `env.placed_patches`
-- list containing coordinate array of placed patches
+- List containing coordinate array of placed patches
+- Its sequence correspond to `env.step` sequence
+- Invalid patch won't shown on this property
 
 <h3>Methods</h3>
 
@@ -278,6 +282,9 @@ env.render()
 ```
 <img src="https://user-images.githubusercontent.com/39043516/121534337-17bc5880-ca3c-11eb-99a2-d1d4dba5f66c.png" alt="render" />
 
+Applying all zero action will cause the state below.
+Because the space has a hole on its center, the patch is out of space.
+So, it's not vaild and won't make any differences.
 ```python
 state = env.step(0,0,0)
 print(state)
@@ -312,6 +319,9 @@ env.render()
 ```
 <img src="https://user-images.githubusercontent.com/39043516/121534557-49352400-ca3c-11eb-9c29-6f9df338b57f.png" alt="render" />
 
+Applying (4,4,0) action will cause the state below.
+The patch angle is not proper, and the patch is out of space.
+So, it's not vaild and won't make any differences.
 ```python
 state = env.step(4,4,0)
 print(state)
@@ -346,6 +356,8 @@ env.render()
 ```
 <img src="https://user-images.githubusercontent.com/39043516/121534600-53efb900-ca3c-11eb-987f-47aed3a690a1.png" alt="render" />
 
+Applying (4,4,-0.8) action will cause the state below.
+The patch is within the space, and it's placed.
 ```python
 state = env.step(4,4,-0.8)
 print(state)
@@ -386,6 +398,8 @@ env.render()
 ```
 <img src="https://user-images.githubusercontent.com/39043516/121534679-6669f280-ca3c-11eb-9ede-ac5ae2ed156a.png" alt="render" />
 
+Applying (-2,-6,-0.8) action will cause the state below.
+The patch is within the space, and it's placed.
 ```python
 state = env.step(-2,-6,-0.8)
 print(state)
@@ -431,6 +445,9 @@ env.render()
 ```
 <img src="https://user-images.githubusercontent.com/39043516/121534739-74b80e80-ca3c-11eb-94fc-d1572c0a2f0e.png" alt="render" />
 
+Applying (-4,-4,-0.8) action will cause the state below.
+The patch is within the space, but overlap other patch(-2,-6,-0.8 patch).
+So, it's not vaild and won't make any differences.
 ```python
 state = env.step(-4,-4,-0.8)
 print(state)
@@ -476,6 +493,9 @@ env.render()
 ```
 <img src="https://user-images.githubusercontent.com/39043516/121534763-7b468600-ca3c-11eb-96f4-51238e868629.png" alt="render" />
 
+Applying (-6,-2,-0.8) action will cause the state below.
+The patch is within the space, and doesn't touch any other patches.
+So, it's placed.
 ```python
 state = env.step(-6,-2,-0.8)
 print(state)
