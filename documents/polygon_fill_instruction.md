@@ -27,18 +27,26 @@ A patch have to be placed within the space, and cannot overlap other patches.
 
 <h3>Given</h3>
 
-- Space to fill  
-- Patch to place  
+- Set of space to fill
+    - 10 predefined spaces are given
+    - Array of polygon vertex coordinates
+- Patch to place
+    - Single unit patch of which the centroid is on origin and zero rotation is given
+    - Array of polygon vertex coordinates
+- State information
+    - When action is applied, information of subsequent state is calculated and offered
 
 <h3>Action</h3>
 
-- Patch rotation and translation
+- Patch placement with rotation and translation parameter
 
 <h3>Goal</h3>
 
 - Fill the target spaces with maximum number of patches  
-    - Target spaces are given predefined spaces (There are 9 predefined spaces)
+    - Target spaces are given predefined spaces (There are 10 predefined spaces)
 - The number of trial have to be minimized at inference time  
+    - When an action is applied, trial count gains by 1, regardless of the action validity
+    - When the action is invalid, environment fails to place the patch, and patch won't be placed but trial number will be counted
 
 <h3>Constraints</h3>
 
@@ -49,7 +57,9 @@ A patch have to be placed within the space, and cannot overlap other patches.
 
 - You can wrap the given environment with your custom environment
     - Given environment provides minimal information to solve the problem
+    - Depends on your method, these information may not sufficient to solve the problem
     - You can create a wrapper environment to generate additional information
+    - If you are familiar with some frameworks(like Gym, etc.), you can use given environment as a library and create wrapper environment inherits framework you want to use
     - If you create a wrapper environment, you have to submit that as well
 
 <h3>Restricted</h3>
@@ -63,6 +73,12 @@ A patch have to be placed within the space, and cannot overlap other patches.
     - There are additional test spaces that we do not offer to applicants
     - Good performance on those is not mandatory, but recommended
     - Extra points will given for performance on those test set
+
+- Minimal rule is recommended
+    - To make better performance, simplifying problem with adding some rules is effective way
+    - But, the more we add rules, versatility of the agent decreases and not adaptable to complex problem
+    - The real problem is much more complex than this toy problem, that we have to minimize rules for agent
+    - Don't hesitate to add rules if you think they are essential to solve the problem, but avoid adding unnecessary rules
 
 <h2 align="center">Manual</h2>
 
@@ -82,7 +98,7 @@ env = PolygonFillEnv()
 `env.spaces`
 - Space samples to place patches  
 - It consists of several spaces
-- Canvas bound is (-10, -10, 10, 10), and you don't have to consider space out of bound 
+- Canvas bound is `(-10, -10, 10, 10)`, and you don't have to consider space out of bound 
 
 `env.space`
 - Dictionary of two items
@@ -91,10 +107,10 @@ env = PolygonFillEnv()
 
 `env.patch`
 - Coordinate array of base patch to fill space
-- Its centroid is on (0, 0)
+- Its centroid is on `(0, 0)`
 - The action will be placing the patch, rotated and translated from this base patch
 - Fixed value
-    - [[-2.5, -1.15], [2.5, -1.15], [2.5, 1.15], [-2.5, 1.15], [-2.5, -1.15]]
+    - `[[-2.5, -1.15], [2.5, -1.15], [2.5, 1.15], [-2.5, 1.15], [-2.5, -1.15]]`
 
 `env.placed_patches`
 - List containing coordinate array of placed patches
