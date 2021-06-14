@@ -3,7 +3,7 @@
 <p align="center">
   <a href="#problem-description">Problem Description</a> •
   <a href="#manual">Manual</a> •
-  <a href="#submission guidelines">Submission Guidelines</a>
+  <a href="#submission-guidelines">Submission Guidelines</a>
 </p>
 
 <h2 align="center">Problem Description</h2>
@@ -764,13 +764,13 @@ env.render()
 
 <h3>Submission Deadline</h3>
 
-- Applicants are free to set the deadline for submission. However, you must notify Spacewalk of the deadline in advance.
+- Applicants are free to set the deadline for submission. However, you must notify us of the deadline in advance.
     - Deadline notification due : Until the day after the test notification mail is sent
-    - Notify to : <iglee@spacewalk.tech>
+    - Please notify us by e-mail(<iglee@spacewalk.tech>).
 
-You don't have to rush to submit, so give yourself plenty of time.
-Once you fix the deadline, please stick to it.
-If you think you will not be able to do it within the deadline, please notify us by e-mail in advance.
+You don't have to rush to submit, so give yourself plenty of time.  
+Once you fix the deadline, please stick to it.  
+If you think you will not be able to do it within the deadline, please notify us by e-mail in advance.  
 
 <h3>Submission List</h3>
 
@@ -793,4 +793,4 @@ If we fail to reproduce your result described on answer document, and if there a
 
 <h3>How to Submit</h3>
 
-- Please submit your submission to <iglee@spacewalk.tech>.
+- Please submit your submission by e-mail(<iglee@spacewalk.tech>).
