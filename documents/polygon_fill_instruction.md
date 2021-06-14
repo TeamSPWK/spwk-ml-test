@@ -2,7 +2,8 @@
 
 <p align="center">
   <a href="#problem-description">Problem Description</a> •
-  <a href="#manual">Manual</a>
+  <a href="#manual">Manual</a> •
+  <a href="#submission guidelines">Submission Guidelines</a>
 </p>
 
 <h2 align="center">Problem Description</h2>
@@ -758,3 +759,38 @@ env.render()
 }
 ```
 <img src="https://user-images.githubusercontent.com/39043516/121534798-84cfee00-ca3c-11eb-9e1d-41d8ca4c717c.png" alt="render" />
+
+<h2 align="center">Submission Guidelines</h2>
+
+<h3>Submission Deadline</h3>
+
+- Applicants are free to set the deadline for submission. However, you must notify Spacewalk of the deadline in advance.
+    - Deadline notification due : Until the day after the test notification mail is sent
+    - Notify to : <iglee@spacewalk.tech>
+
+You don't have to rush to submit, so give yourself plenty of time.
+Once you fix the deadline, please stick to it.
+If you think you will not be able to do it within the deadline, please notify us by e-mail in advance.
+
+<h3>Submission List</h3>
+
+- Answer document
+    - Answer document should describe in detail how you solved the problem.
+    - There is no restrictions on the format of the document, but the document should be sufficiently expressive of how you solved the problem.
+
+- Agent code
+    - Agent(Problem solver) code have to be submitted.
+    - Reproducibility is crucial. If you have additional resources required to reproduce your result, you should include them in your submission (checkpoints, etc.)
+
+(Optional)
+- Wrapper environment code
+    - If you created wrapper environment code, you should include it in your submission.
+
+Reproducibility with minimum effort is the most important for your submission.  
+You don't have to divide your code into agent part and environment part.  
+Please attach all things that required for us to reproduce your result.  
+If we fail to reproduce your result described on answer document, and if there are no valid cause for the non-reproducibility, your score may be deducted.  
+
+<h3>How to Submit</h3>
+
+- Please submit your submission to <iglee@spacewalk.tech>.
