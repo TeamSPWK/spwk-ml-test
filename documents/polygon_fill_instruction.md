@@ -2,7 +2,8 @@
 
 <p align="center">
   <a href="#problem-description">Problem Description</a> •
-  <a href="#manual">Manual</a>
+  <a href="#manual">Manual</a> •
+  <a href="#submission-guidelines">Submission Guidelines</a>
 </p>
 
 <h2 align="center">Problem Description</h2>
@@ -99,38 +100,89 @@ env = PolygonFillEnv()
 - Space samples to place patches  
 - It consists of several spaces
 - Canvas bound is `(-10, -10, 10, 10)`, and you don't have to consider space out of bound 
+- You can select space among these spaces with env.select_space() method
 
 `env.space`
 - Dictionary of two items
     - shell : coordinate array of polygon shell
     - holes : list containing coordinate array of polygon hole
+- Shell will form outer wall, and holes will form inner wall of space polygon
+```python
+{
+    'shell': array([[-10., -10.],
+                    [-10.,  10.],
+                    [ 10.,  10.],
+                    [ 10., -10.],
+                    [-10., -10.]]), 
+    'holes': [
+        array([[-5., -5.],
+                [ 5., -5.],
+                [ 5.,  5.],
+                [-5.,  5.],
+                [-5., -5.]])
+    ]
+}
+```
+<img src="https://user-images.githubusercontent.com/39043516/121835141-71a67200-cd0b-11eb-91f9-1152beef8106.png" alt="render" />
 
 `env.patch`
 - Coordinate array of base patch to fill space
 - Its centroid is on `(0, 0)`
 - The action will be placing the patch, rotated and translated from this base patch
-- Fixed value
+- Fixed value (Just one type of base patch is considered)
     - `[[-2.5, -1.15], [2.5, -1.15], [2.5, 1.15], [-2.5, 1.15], [-2.5, -1.15]]`
+<img src="https://user-images.githubusercontent.com/39043516/121835303-dcf04400-cd0b-11eb-9c76-15b1664a1a42.png" alt="render" />
+
+`env.new_patch`
+- Coordinate array of latest patch applied by action
+- It's updated regardless of action validity
+    - When the action is invalid and the patch is not placed, `env.new_patch` will be updated though
 
 `env.placed_patches`
 - List containing coordinate array of placed patches
 - Its sequence correspond to `env.step` sequence
 - Invalid patch won't shown on this property
 
+`env.n_patches`
+- Number of patches placed on the space
+- It counts valid patches only
+
+`env.n_steps`
+- Number of trial to place the patch on the space
+- Every patch placement increments this property, whether valid or invalid
+
 <h3>Methods</h3>
 
 `env.select_space(index)`
 - Select the space from predefined spaces with index
+    - It select the space from `env.spaces`
+- It resets the environment
+    - Placed patches is removed
+    - `env.n_steps` counter is reset
 
 `env.step(patch_x, patch_y, patch_angle)`
 - Apply action
     - args
         - `patch_x (float)` : The centroid x position of patch. The range is -10 to 10
-        - `patch_x (float)` : The centroid y position of patch. The range is -10 to 10
-        - `patch_x (float)` : The rotation of patch. The range is -pi/2 to pi/2. (unit:radian)
+        - `patch_y (float)` : The centroid y position of patch. The range is -10 to 10
+        - `patch_angle (float)` : The rotation of patch. The range is -pi/2 to pi/2. (unit:radian)
+    - returns
+        - `(dict)` : Next state information
+            - `is_valid (bool)` : If applied action is valid or not
+                - `area_out_of_space` and `area_intersect_patches`, either one of the is non-zero, the action is invalid
+            - `n_steps` : `env.n_steps` updated by the action
+            - `n_patches` : `env.n_patches` updated by the action
+            - `space` : `env.space` updated by the action
+            - `selected_patch` : `env.new_patch` updated by the action
+            - `placed_patches` : `env.placed_patches` updated by the action
+            - `area_out_of_space` : The area where the patch is out of space
+            - `area_intersect_patches` : The area where a patch overlaps other patches
+
 
 `env.reset()`
 - Reset environment
+    - Remove all placed patches
+    - Set step counter to zero
 
 `env.render(save_img=False, path=None, fname=None, show_last=True, show_axis=True)`
 - Render current state. With adjusting its args, you can use image feature for training.
@@ -289,6 +341,146 @@ for i in range(len(env.spaces)):
     env.render()
 ```
 
+```python
+{
+    'shell': array([[-10., -10.],
+                    [ 10., -10.],
+                    [ 10.,  10.],
+                    [-10.,  10.],
+                    [-10., -10.]]), 
+    'holes': []
+}
+```
+<img src="https://user-images.githubusercontent.com/39043516/121836070-bb905780-cd0d-11eb-8ebe-019276f86b72.png" alt="render" />
+
+```python
+{
+    'shell': array([[-10., -10.],
+                    [ -3., -10.],
+                    [ -3.,  10.],
+                    [-10.,  10.],
+                    [-10., -10.]]), 
+    'holes': []
+}
+```
+<img src="https://user-images.githubusercontent.com/39043516/121836071-bc28ee00-cd0d-11eb-9b0e-eea2498d0abc.png" alt="render" />
+
+```python
+{
+    'shell': array([[-5., -5.],
+                    [ 5., -5.],
+                    [ 5.,  5.],
+                    [-5.,  5.],
+                    [-5., -5.]]), 
+    'holes': []
+}
+```
+<img src="https://user-images.githubusercontent.com/39043516/121836072-bcc18480-cd0d-11eb-9a95-a3a583ab766d.png" alt="render" />
+
+```python
+{
+    'shell': array([[-10., -10.],
+                    [-10.,  10.],
+                    [ 10.,  10.],
+                    [ 10., -10.],
+                    [-10., -10.]]), 
+    'holes': [
+        array([[-5., -5.],
+                [ 5., -5.],
+                [ 5.,  5.],
+                [-5.,  5.],
+                [-5., -5.]])
+    ]
+}
+```
+<img src="https://user-images.githubusercontent.com/39043516/121836074-bcc18480-cd0d-11eb-832f-8c3783612648.png" alt="render" />
+
+```python
+{
+    'shell': array([[  0., -10.],
+                    [ 10.,   0.],
+                    [  0.,  10.],
+                    [-10.,   0.],
+                    [  0., -10.]]), 
+    'holes': []
+}
+```
+<img src="https://user-images.githubusercontent.com/39043516/121836075-bd5a1b00-cd0d-11eb-9c41-da1f72561dde.png" alt="render" />
+
+```python
+{
+    'shell': array([[  0., -10.],
+                    [-10.,   0.],
+                    [  0.,  10.],
+                    [ 10.,   0.],
+                    [  0., -10.]]), 
+    'holes': [
+        array([[ 0., -3.],
+                [ 3.,  0.],
+                [ 0.,  3.],
+                [-3.,  0.],
+                [ 0., -3.]])
+    ]
+}
+```
+<img src="https://user-images.githubusercontent.com/39043516/121836078-bdf2b180-cd0d-11eb-95a1-7e5b383b9834.png" alt="render" />
+
+```python
+{
+    'shell': array([[-10., -10.],
+                    [ 10., -10.],
+                    [ 10.,  -6.],
+                    [ -2.,  -6.],
+                    [ -2.,   6.],
+                    [ 10.,   6.],
+                    [ 10.,  10.],
+                    [-10.,  10.],
+                    [-10., -10.]]), 
+    'holes': []
+}
+```
+<img src="https://user-images.githubusercontent.com/39043516/121836079-bdf2b180-cd0d-11eb-8909-c7c7fd0b63d8.png" alt="render" />
+
+```python
+{
+    'shell': array([[-10., -10.],
+                    [  8., -10.],
+                    [ 10.,   7.],
+                    [-10.,  10.],
+                    [  0.,  -3.],
+                    [-10., -10.]]), 
+    'holes': []
+}
+```
+<img src="https://user-images.githubusercontent.com/39043516/121836081-be8b4800-cd0d-11eb-9865-1e7c6f0b8cf0.png" alt="render" />
+
+```python
+{
+    'shell': array([[-10., -10.],
+                    [ 10., -10.],
+                    [  0.,  10.],
+                    [-10., -10.]]), 
+    'holes': []
+}
+```
+<img src="https://user-images.githubusercontent.com/39043516/121836082-be8b4800-cd0d-11eb-89c8-a4394ae8bfc5.png" alt="render" />
+
+```python
+{
+    'shell': array([[-10., -10.],
+                    [  0.,  10.],
+                    [ 10., -10.],
+                    [-10., -10.]]), 
+    'holes': [
+        array([[-4., -6.],
+                [ 4., -4.],
+                [-2.,  2.],
+                [-4., -6.]])
+    ]
+}
+```
+<img src="https://user-images.githubusercontent.com/39043516/121836083-bf23de80-cd0d-11eb-8f73-405a73c7748b.png" alt="render" />
+
 You will apply some actions with `env.step()` method and see the result of it.  
 5th predifined space is good to know how it works, so, choose 5th space.  
 It's diamond shape space with a hole in center.
@@ -308,6 +500,7 @@ env.render()
 
 {
     'is_valid': False, 
+    'n_steps': 1, 
     'n_patches': 0, 
     'space': {
         'shell': array([[  0., -10.],
@@ -345,6 +538,7 @@ env.render()
 
 {
     'is_valid': False, 
+    'n_steps': 2, 
     'n_patches': 0, 
     'space': {
         'shell': array([[  0., -10.],
@@ -381,6 +575,7 @@ env.render()
 
 {
     'is_valid': True, 
+    'n_steps': 3, 
     'n_patches': 1, 
     'space': {
         'shell': array([[  0., -10.],
@@ -423,6 +618,7 @@ env.render()
 
 {
     'is_valid': True, 
+    'n_steps': 4, 
     'n_patches': 2, 
     'space': {
         'shell': array([[  0., -10.],
@@ -471,6 +667,7 @@ env.render()
 
 {
     'is_valid': False, 
+    'n_steps': 5, 
     'n_patches': 2, 
     'space': {
         'shell': array([[  0., -10.],
@@ -519,6 +716,7 @@ env.render()
 
 {
     'is_valid': True, 
+    'n_steps': 6, 
     'n_patches': 3, 
     'space': {
         'shell': array([[  0., -10.],
@@ -561,3 +759,38 @@ env.render()
 }
 ```
 <img src="https://user-images.githubusercontent.com/39043516/121534798-84cfee00-ca3c-11eb-9e1d-41d8ca4c717c.png" alt="render" />
+
+<h2 align="center">Submission Guidelines</h2>
+
+<h3>Submission Deadline</h3>
+
+- Applicants are free to set the deadline for submission. However, you must notify us of the deadline in advance.
+    - Deadline notification due : Until the day after the test notification mail is sent
+    - Please notify us by e-mail(<iglee@spacewalk.tech>).
+
+You don't have to rush to submit, so give yourself plenty of time.  
+Once you fix the deadline, please stick to it.  
+If you think you will not be able to do it within the deadline, please notify us by e-mail in advance.  
+
+<h3>Submission List</h3>
+
+- Answer document
+    - Answer document should describe in detail how you solved the problem.
+    - There is no restrictions on the format of the document, but the document should be sufficiently expressive of how you solved the problem.
+
+- Agent code
+    - Agent(Problem solver) code have to be submitted.
+    - Reproducibility is crucial. If you have additional resources required to reproduce your result, you should include them in your submission (checkpoints, etc.)
+
+(Optional)
+- Wrapper environment code
+    - If you created wrapper environment code, you should include it in your submission.
+
+Reproducibility with minimum effort is the most important for your submission.  
+You don't have to divide your code into agent part and environment part.  
+Please attach all things that required for us to reproduce your result.  
+If we fail to reproduce your result described on answer document, and if there are no valid cause for the non-reproducibility, your score may be deducted.  
+
+<h3>How to Submit</h3>
+
+- Please submit your submission by e-mail(<iglee@spacewalk.tech>).

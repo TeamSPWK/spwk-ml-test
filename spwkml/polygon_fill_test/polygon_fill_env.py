@@ -17,7 +17,7 @@ class PolygonFillEnv():
         self.add_space_coords([-10,10,10,-10],[-10,-10,10,10])
         self.add_space_samples()
         self.__sample_index = 0
-        self.__n_step = 0
+        self.__n_steps = 0
         self.__new_patch = geometry.Polygon()
         
         self.reset()
@@ -30,8 +30,12 @@ class PolygonFillEnv():
         return [{'shell':np.array(space.exterior), 'holes':[np.array(interior) for interior in space.interiors]} for space in self.__spaces]
             
     @property
-    def n_step(self):
-        return self.__n_step
+    def n_steps(self):
+        return self.__n_steps
+
+    @property
+    def n_patches(self):
+        return len(self.placed_patches)
     
     @property
     def __placed_patches_mp(self):
@@ -77,7 +81,7 @@ class PolygonFillEnv():
 
     def reset(self):
         self.__placed_patches = []
-        self.__n_step = 0
+        self.__n_steps = 0
         self.__new_patch = geometry.Polygon()
 
     def coords_to_polygon(self, x_coords, y_coords):
@@ -147,12 +151,12 @@ class PolygonFillEnv():
         if is_valid:
             self.__placed_patches.append(self.__new_patch)
 
-        self.__n_step += 1
+        self.__n_steps += 1
         
         return {
             'is_valid': is_valid,
-            'n_step': self.n_step,
-            'n_patches': len(self.placed_patches),
+            'n_steps': self.n_steps,
+            'n_patches': self.n_patches,
             'space': self.space,
             'selected_patch': self.new_patch,
             'placed_patches': self.placed_patches,
