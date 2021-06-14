@@ -1,10 +1,10 @@
 from setuptools import setup, find_packages
 
 setup_requires = [
+    "numpy"
 ]
 
 install_requires = [
-    "numpy==1.19.2",
     "shapely==1.7.1",
     "matplotlib==3.2.1"
 ]
