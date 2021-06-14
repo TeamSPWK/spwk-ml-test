@@ -99,38 +99,87 @@ env = PolygonFillEnv()
 - Space samples to place patches  
 - It consists of several spaces
 - Canvas bound is `(-10, -10, 10, 10)`, and you don't have to consider space out of bound 
+- You can select space among these spaces with env.select_space() method
 
 `env.space`
 - Dictionary of two items
     - shell : coordinate array of polygon shell
     - holes : list containing coordinate array of polygon hole
+- Shell will form outer wall, and holes will form inner wall of space polygon
+```
+{
+    'shell': array([[-10., -10.],
+                    [-10.,  10.],
+                    [ 10.,  10.],
+                    [ 10., -10.],
+                    [-10., -10.]]), 
+    'holes': [
+        array([[-5., -5.],
+                [ 5., -5.],
+                [ 5.,  5.],
+                [-5.,  5.],
+                [-5., -5.]])
+    ]
+}
+```
 
 `env.patch`
 - Coordinate array of base patch to fill space
 - Its centroid is on `(0, 0)`
 - The action will be placing the patch, rotated and translated from this base patch
-- Fixed value
+- Fixed value (Just one type of base patch is considered)
     - `[[-2.5, -1.15], [2.5, -1.15], [2.5, 1.15], [-2.5, 1.15], [-2.5, -1.15]]`
+
+`env.new_patch`
+- Coordinate array of latest patch applied by action
+- It's updated regardless of action validity
+    - When the action is invalid and the patch is not placed, `env.new_patch` will be updated though
 
 `env.placed_patches`
 - List containing coordinate array of placed patches
 - Its sequence correspond to `env.step` sequence
 - Invalid patch won't shown on this property
 
+`env.n_patches`
+- Number of patches placed on the space
+- It counts valid patches only
+
+`env.n_steps`
+- Number of trial to place the patch on the space
+- Every patch placement increments this property, whether valid or invalid
+
 <h3>Methods</h3>
 
 `env.select_space(index)`
 - Select the space from predefined spaces with index
+    - It select the space from `env.spaces`
+- It resets the environment
+    - Placed patches is removed
+    - `env.n_steps` counter is reset
 
 `env.step(patch_x, patch_y, patch_angle)`
 - Apply action
     - args
         - `patch_x (float)` : The centroid x position of patch. The range is -10 to 10
-        - `patch_x (float)` : The centroid y position of patch. The range is -10 to 10
-        - `patch_x (float)` : The rotation of patch. The range is -pi/2 to pi/2. (unit:radian)
+        - `patch_y (float)` : The centroid y position of patch. The range is -10 to 10
+        - `patch_angle (float)` : The rotation of patch. The range is -pi/2 to pi/2. (unit:radian)
+    - returns
+        - `(dict)` : Next state information
+            - `is_valid (bool)` : If applied action is valid or not
+                - `area_out_of_space` and `area_intersect_patches`, either one of the is non-zero, the action is invalid
+            - `n_steps` : `env.n_steps` updated by the action
+            - `n_patches` : `env.n_patches` updated by the action
+            - `space` : `env.space` updated by the action
+            - `selected_patch` : `env.new_patch` updated by the action
+            - `placed_patches` : `env.placed_patches` updated by the action
+            - `area_out_of_space` : The area where the patch is out of space
+            - `area_intersect_patches` : The area where a patch overlaps other patches
+
 
 `env.reset()`
 - Reset environment
+    - Remove all placed patches
+    - Set step counter to zero
 
 `env.render(save_img=False, path=None, fname=None, show_last=True, show_axis=True)`
 - Render current state. With adjusting its args, you can use image feature for training.
@@ -308,6 +357,7 @@ env.render()
 
 {
     'is_valid': False, 
+    'n_steps': 1, 
     'n_patches': 0, 
     'space': {
         'shell': array([[  0., -10.],
@@ -345,6 +395,7 @@ env.render()
 
 {
     'is_valid': False, 
+    'n_steps': 2, 
     'n_patches': 0, 
     'space': {
         'shell': array([[  0., -10.],
@@ -381,6 +432,7 @@ env.render()
 
 {
     'is_valid': True, 
+    'n_steps': 3, 
     'n_patches': 1, 
     'space': {
         'shell': array([[  0., -10.],
@@ -423,6 +475,7 @@ env.render()
 
 {
     'is_valid': True, 
+    'n_steps': 4, 
     'n_patches': 2, 
     'space': {
         'shell': array([[  0., -10.],
@@ -471,6 +524,7 @@ env.render()
 
 {
     'is_valid': False, 
+    'n_steps': 5, 
     'n_patches': 2, 
     'space': {
         'shell': array([[  0., -10.],
@@ -519,6 +573,7 @@ env.render()
 
 {
     'is_valid': True, 
+    'n_steps': 6, 
     'n_patches': 3, 
     'space': {
         'shell': array([[  0., -10.],
