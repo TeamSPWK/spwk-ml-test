@@ -122,6 +122,7 @@ env = PolygonFillEnv()
     ]
 }
 ```
+<img src="https://user-images.githubusercontent.com/39043516/121835141-71a67200-cd0b-11eb-91f9-1152beef8106.png" alt="render" />
 
 `env.patch`
 - Coordinate array of base patch to fill space
@@ -129,6 +130,7 @@ env = PolygonFillEnv()
 - The action will be placing the patch, rotated and translated from this base patch
 - Fixed value (Just one type of base patch is considered)
     - `[[-2.5, -1.15], [2.5, -1.15], [2.5, 1.15], [-2.5, 1.15], [-2.5, -1.15]]`
+<img src="hhttps://user-images.githubusercontent.com/39043516/121835303-dcf04400-cd0b-11eb-9c76-15b1664a1a42.png" alt="render" />
 
 `env.new_patch`
 - Coordinate array of latest patch applied by action
