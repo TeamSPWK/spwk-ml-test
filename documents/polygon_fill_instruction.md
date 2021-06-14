@@ -341,106 +341,142 @@ for i in range(len(env.spaces)):
 ```
 
 ```python
-{'shell': array([[-10., -10.],
-       [ 10., -10.],
-       [ 10.,  10.],
-       [-10.,  10.],
-       [-10., -10.]]), 'holes': []}
+{
+    'shell': array([[-10., -10.],
+                    [ 10., -10.],
+                    [ 10.,  10.],
+                    [-10.,  10.],
+                    [-10., -10.]]), 
+    'holes': []
+}
 ```
 <img src="https://user-images.githubusercontent.com/39043516/121836070-bb905780-cd0d-11eb-8ebe-019276f86b72.png" alt="render" />
 
 ```python
-{'shell': array([[-10., -10.],
-       [ -3., -10.],
-       [ -3.,  10.],
-       [-10.,  10.],
-       [-10., -10.]]), 'holes': []}
+{
+    'shell': array([[-10., -10.],
+                    [ -3., -10.],
+                    [ -3.,  10.],
+                    [-10.,  10.],
+                    [-10., -10.]]), 
+    'holes': []
+}
 ```
 <img src="https://user-images.githubusercontent.com/39043516/121836071-bc28ee00-cd0d-11eb-9b0e-eea2498d0abc.png" alt="render" />
 
 ```python
-{'shell': array([[-5., -5.],
-       [ 5., -5.],
-       [ 5.,  5.],
-       [-5.,  5.],
-       [-5., -5.]]), 'holes': []}
+{
+    'shell': array([[-5., -5.],
+                    [ 5., -5.],
+                    [ 5.,  5.],
+                    [-5.,  5.],
+                    [-5., -5.]]), 
+    'holes': []
+}
 ```
 <img src="https://user-images.githubusercontent.com/39043516/121836072-bcc18480-cd0d-11eb-9a95-a3a583ab766d.png" alt="render" />
 
 ```python
-{'shell': array([[-10., -10.],
-       [-10.,  10.],
-       [ 10.,  10.],
-       [ 10., -10.],
-       [-10., -10.]]), 'holes': [array([[-5., -5.],
-       [ 5., -5.],
-       [ 5.,  5.],
-       [-5.,  5.],
-       [-5., -5.]])]}
+{
+    'shell': array([[-10., -10.],
+                    [-10.,  10.],
+                    [ 10.,  10.],
+                    [ 10., -10.],
+                    [-10., -10.]]), 
+    'holes': [
+        array([[-5., -5.],
+                [ 5., -5.],
+                [ 5.,  5.],
+                [-5.,  5.],
+                [-5., -5.]])
+    ]
+}
 ```
 <img src="https://user-images.githubusercontent.com/39043516/121836074-bcc18480-cd0d-11eb-832f-8c3783612648.png" alt="render" />
 
 ```python
-{'shell': array([[  0., -10.],
-       [ 10.,   0.],
-       [  0.,  10.],
-       [-10.,   0.],
-       [  0., -10.]]), 'holes': []}
+{
+    'shell': array([[  0., -10.],
+                    [ 10.,   0.],
+                    [  0.,  10.],
+                    [-10.,   0.],
+                    [  0., -10.]]), 
+    'holes': []
+}
 ```
 <img src="https://user-images.githubusercontent.com/39043516/121836075-bd5a1b00-cd0d-11eb-9c41-da1f72561dde.png" alt="render" />
 
 ```python
-{'shell': array([[  0., -10.],
-       [-10.,   0.],
-       [  0.,  10.],
-       [ 10.,   0.],
-       [  0., -10.]]), 'holes': [array([[ 0., -3.],
-       [ 3.,  0.],
-       [ 0.,  3.],
-       [-3.,  0.],
-       [ 0., -3.]])]}
+{
+    'shell': array([[  0., -10.],
+                    [-10.,   0.],
+                    [  0.,  10.],
+                    [ 10.,   0.],
+                    [  0., -10.]]), 
+    'holes': [
+        array([[ 0., -3.],
+                [ 3.,  0.],
+                [ 0.,  3.],
+                [-3.,  0.],
+                [ 0., -3.]])
+    ]
+}
 ```
 <img src="https://user-images.githubusercontent.com/39043516/121836078-bdf2b180-cd0d-11eb-95a1-7e5b383b9834.png" alt="render" />
 
 ```python
-{'shell': array([[-10., -10.],
-       [ 10., -10.],
-       [ 10.,  -6.],
-       [ -2.,  -6.],
-       [ -2.,   6.],
-       [ 10.,   6.],
-       [ 10.,  10.],
-       [-10.,  10.],
-       [-10., -10.]]), 'holes': []}
+{
+    'shell': array([[-10., -10.],
+                    [ 10., -10.],
+                    [ 10.,  -6.],
+                    [ -2.,  -6.],
+                    [ -2.,   6.],
+                    [ 10.,   6.],
+                    [ 10.,  10.],
+                    [-10.,  10.],
+                    [-10., -10.]]), 
+    'holes': []
+}
 ```
 <img src="https://user-images.githubusercontent.com/39043516/121836079-bdf2b180-cd0d-11eb-8909-c7c7fd0b63d8.png" alt="render" />
 
 ```python
-{'shell': array([[-10., -10.],
-       [  8., -10.],
-       [ 10.,   7.],
-       [-10.,  10.],
-       [  0.,  -3.],
-       [-10., -10.]]), 'holes': []}
+{
+    'shell': array([[-10., -10.],
+                    [  8., -10.],
+                    [ 10.,   7.],
+                    [-10.,  10.],
+                    [  0.,  -3.],
+                    [-10., -10.]]), 
+    'holes': []
+}
 ```
 <img src="https://user-images.githubusercontent.com/39043516/121836081-be8b4800-cd0d-11eb-9865-1e7c6f0b8cf0.png" alt="render" />
 
 ```python
-{'shell': array([[-10., -10.],
-       [ 10., -10.],
-       [  0.,  10.],
-       [-10., -10.]]), 'holes': []}
+{
+    'shell': array([[-10., -10.],
+                    [ 10., -10.],
+                    [  0.,  10.],
+                    [-10., -10.]]), 
+    'holes': []
+}
 ```
 <img src="https://user-images.githubusercontent.com/39043516/121836082-be8b4800-cd0d-11eb-89c8-a4394ae8bfc5.png" alt="render" />
 
 ```python
-{'shell': array([[-10., -10.],
-       [  0.,  10.],
-       [ 10., -10.],
-       [-10., -10.]]), 'holes': [array([[-4., -6.],
-       [ 4., -4.],
-       [-2.,  2.],
-       [-4., -6.]])]}
+{
+    'shell': array([[-10., -10.],
+                    [  0.,  10.],
+                    [ 10., -10.],
+                    [-10., -10.]]), 
+    'holes': [
+        array([[-4., -6.],
+                [ 4., -4.],
+                [-2.,  2.],
+                [-4., -6.]])
+    ]
+}
 ```
 <img src="https://user-images.githubusercontent.com/39043516/121836083-bf23de80-cd0d-11eb-8f73-405a73c7748b.png" alt="render" />
 
