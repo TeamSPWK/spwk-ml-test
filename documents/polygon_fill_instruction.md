@@ -106,7 +106,7 @@ env = PolygonFillEnv()
     - shell : coordinate array of polygon shell
     - holes : list containing coordinate array of polygon hole
 - Shell will form outer wall, and holes will form inner wall of space polygon
-```
+```python
 {
     'shell': array([[-10., -10.],
                     [-10.,  10.],
@@ -130,7 +130,7 @@ env = PolygonFillEnv()
 - The action will be placing the patch, rotated and translated from this base patch
 - Fixed value (Just one type of base patch is considered)
     - `[[-2.5, -1.15], [2.5, -1.15], [2.5, 1.15], [-2.5, 1.15], [-2.5, -1.15]]`
-<img src="hhttps://user-images.githubusercontent.com/39043516/121835303-dcf04400-cd0b-11eb-9c76-15b1664a1a42.png" alt="render" />
+<img src="https://user-images.githubusercontent.com/39043516/121835303-dcf04400-cd0b-11eb-9c76-15b1664a1a42.png" alt="render" />
 
 `env.new_patch`
 - Coordinate array of latest patch applied by action
