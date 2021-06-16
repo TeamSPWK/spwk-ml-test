@@ -147,7 +147,7 @@ class PolygonFillEnv():
         # area_out_of_space = self.__new_patch.difference(self.__space).area
         # area_intersect_patches = self.__new_patch.intersection(self.__placed_patches_mp).area
         area_out_of_space = self.__new_patch.buffer(-1e-4).difference(self.__space).area
-        area_intersect_patches = self.__new_patch(-1e-4).intersection(self.__placed_patches_mp).area
+        area_intersect_patches = self.__new_patch.buffer(-1e-4).intersection(self.__placed_patches_mp).area
         
         is_valid = (area_out_of_space == 0) and (area_intersect_patches == 0)
 
