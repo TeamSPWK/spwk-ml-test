@@ -13,7 +13,7 @@ class PolygonFillEnv():
     def __init__(self):
         self.__spaces = []
         self.__placed_patches = []
-        self.__patch = self.coords_to_polygon([-2.5,2.5,2.5,-2.5], [-1.15,-1.15,1.15,1.15])
+        self.__patch = self.coords_to_polygon([-2.5,2.5,2.5,-2.5], [-1.25,-1.25,1.25,1.25])
         self.add_space_coords([-10,10,10,-10],[-10,-10,10,10])
         self.add_space_samples()
         self.__sample_index = 0
