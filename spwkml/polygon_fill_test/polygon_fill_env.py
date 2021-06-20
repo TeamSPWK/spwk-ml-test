@@ -39,7 +39,8 @@ class PolygonFillEnv():
     
     @property
     def __placed_patches_mp(self):
-        return geometry.MultiPolygon(self.__placed_patches)
+        # return geometry.MultiPolygon(self.__placed_patches)
+        return ops.unary_union(self.__placed_patches)
 
     @property
     def placed_patches(self):
@@ -143,8 +144,10 @@ class PolygonFillEnv():
         new_patch = affinity.rotate(self.__patch, patch_angle, origin='centroid', use_radians=True)
         self.__new_patch = affinity.translate(new_patch, xoff=patch_x, yoff=patch_y)
 
-        area_out_of_space = self.__new_patch.difference(self.__space).area
-        area_intersect_patches = self.__new_patch.intersection(self.__placed_patches_mp).area
+        # area_out_of_space = self.__new_patch.difference(self.__space).area
+        # area_intersect_patches = self.__new_patch.intersection(self.__placed_patches_mp).area
+        area_out_of_space = self.__new_patch.buffer(-1e-4).difference(self.__space).area
+        area_intersect_patches = self.__new_patch.buffer(-1e-4).intersection(self.__placed_patches_mp).area
         
         is_valid = (area_out_of_space == 0) and (area_intersect_patches == 0)
 
