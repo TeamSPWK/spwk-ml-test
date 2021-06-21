@@ -194,7 +194,7 @@ env = PolygonFillEnv()
         - `path (str)` : Path to save image. If `save_img` is False, it's meaningless. Default path is `./imgs` (when `path` is None).
         - `fname (str)` : File name to save image. If save_img is False, it's meaningless. Default name is `img_i.png`, and `i` is growing integer (when `fname` is None).
         - `show_last (bool)` : Whether or not color the last patch. If true, last patch is colored by translucent red.
-        - `show_axis (bool` : Whether or not plot the axis.
+        - `show_axis (bool)` : Whether or not plot the axis.
 
 With the code below, you can check how the environment works
 
