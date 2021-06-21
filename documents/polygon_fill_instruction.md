@@ -3,7 +3,8 @@
 <p align="center">
   <a href="#problem-description">Problem Description</a> •
   <a href="#manual">Manual</a> •
-  <a href="#submission-guidelines">Submission Guidelines</a>
+  <a href="#submission-guidelines">Submission Guidelines</a> •
+  <a href="#appendix">Appendix</a>
 </p>
 
 <h2 align="center">Problem Description</h2>
@@ -777,6 +778,7 @@ If you think you will not be able to do it within the deadline, please notify us
 - Answer document
     - Answer document should describe in detail how you solved the problem.
     - There is no restrictions on the format of the document, but the document should be sufficiently expressive of how you solved the problem.
+    - Please add some images and performance properties of your final results on the document.
 
 - Agent code
     - Agent(Problem solver) code have to be submitted.
@@ -794,3 +796,101 @@ If we fail to reproduce your result described on answer document, and if there a
 <h3>How to Submit</h3>
 
 - Please submit your submission by e-mail(<iglee@spacewalk.tech>).
+
+<h2 align="center">Appendix</h2>
+
+<h3>Wrapper Environment Sample (Wrapper environment for raster information)</h3>
+
+```Python
+from spwkml import PolygonFillEnv
+import numpy as np
+from shapely import geometry
+import cv2
+
+
+class WrapperEnv():
+    """
+    Test for ML chapter applicants
+    Fill polygon space with polygon patches
+    """
+
+    def __init__(self, img_res=128, angle_res=36):
+        self.img_res = img_res
+        self.angle_res = angle_res
+        self.coord_mp = float(self.img_res / 20)
+        self.angle_mp = float(self.angle_res / np.pi)
+        self.original_env = PolygonFillEnv()
+        self.patch_area = geometry.asPolygon(self.original_env.patch).area
+        self.reset()
+
+    def reset(self):
+        self.original_env.reset()
+        self.canvas = np.zeros((self.img_res,self.img_res,3), dtype=np.uint8)
+        self.draw(self.original_env.space['shell'], (1,0,0))
+        for hole in self.original_env.space['holes']:
+            self.draw(hole, (-1,0,0))
+
+    def select_space(self, idx):
+        self.original_env.select_space(idx)
+        self.reset()
+
+    def draw(self, arr, color, to_canvas=True):
+        pts = np.around((arr + 10) * self.coord_mp).astype(np.int32)
+        img = cv2.fillPoly(np.zeros(self.canvas.shape, dtype=np.uint8), [pts], color)
+        if to_canvas:
+            self.canvas += img
+        return img
+        
+    @property
+    def spaces(self):
+        return self.original_env.spaces
+            
+    @property
+    def n_steps(self):
+        return self.original_env.n_steps
+
+    @property
+    def n_patches(self):
+        return self.original_env.n_patches
+    
+    @property
+    def placed_patches(self):
+        return self.original_env.placed_patches
+
+    @property
+    def patch(self):
+        return self.original_env.patch
+
+    @property
+    def space(self):
+        return self.original_env.space
+
+    @property
+    def new_patch(self):
+        return self.original_env.new_patch
+    
+    def step(self, action):
+        action_x, action_y, action_angle = np.squeeze(action)
+        # xy range : 0 ~ 128 (1 bucket added)
+        # angle range : 0 ~ 36 (1 bucket added)
+        patch_x = float(action_x) / self.coord_mp - 10
+        patch_y = float(action_y) / self.coord_mp - 10
+        patch_angle = float(action_angle) / self.angle_mp - np.pi/2
+        data = self.original_env.step(patch_x, patch_y, patch_angle)
+        data['state_raster'] = self.canvas.astype(np.bool).astype(np.float32)
+        data['patch_raster'] = self.draw(data['selected_patch'], (0,1,0), to_canvas=data['is_valid']).astype(np.bool).astype(np.float32)
+
+        parking_score = data['n_patches'] / 32 # 0 ~ 1
+        area_penalty = -(data['area_out_of_space'] + data['area_intersect_patches']) / self.patch_area # -1 ~ 0
+
+        data['rew'] = parking_score + area_penalty
+        data['done'] = not data['is_valid']
+
+        if data['done']:
+            self.reset()
+
+        return data
+
+    def render(self, save_img=False, path=None, fname=None, show_last=True, show_axis=True):
+        self.original_env.render(save_img=save_img, path=path, fname=fname, show_last=show_last, show_axis=show_axis)
+```
