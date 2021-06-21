@@ -84,6 +84,8 @@ A patch have to be placed within the space, and cannot overlap other patches.
 
 <h2 align="center">Manual</h2>
 
+<h3>Import and Create Instance</h3>
+
 `spwkml` package offers environment class for problem definition above.  
 You can make environment instance with it.
 
