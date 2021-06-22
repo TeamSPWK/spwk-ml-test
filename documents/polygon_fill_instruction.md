@@ -831,6 +831,7 @@ class WrapperEnv():
         self.draw(self.original_env.space['shell'], (1,0,0))
         for hole in self.original_env.space['holes']:
             self.draw(hole, (-1,0,0))
+        return self.env.canvas.astype(np.bool).astype(np.float32)
 
     def select_space(self, idx):
         self.original_env.select_space(idx)
@@ -895,4 +896,32 @@ class WrapperEnv():
 
     def render(self, save_img=False, path=None, fname=None, show_last=True, show_axis=True):
         self.original_env.render(save_img=save_img, path=path, fname=fname, show_last=show_last, show_axis=show_axis)
+```
+
+<h3>Wrapper Environment Test Sample (Test code for wrapper environment above)</h3>
+
+```python
+from env.wrapper_env import WrapperEnv
+import numpy as np
+import cv2
+
+env = WrapperEnv()
+img1 = env.reset()
+data = env.step((64,64,18))
+print(data['is_valid'])
+img2 = data['state_raster']
+data = env.step((32,32,9))
+print(data['is_valid'])
+img3 = data['state_raster']
+
+img1 = img1.astype(np.uint8) * 255
+img2 = img2.astype(np.uint8) * 255
+img3 = img3.astype(np.uint8) * 255
+
+cv2.imshow('img', img1)
+cv2.waitKey(0)
+cv2.imshow('img', img2)
+cv2.waitKey(0)
+cv2.imshow('img', img3)
+cv2.waitKey(0)
 ```
