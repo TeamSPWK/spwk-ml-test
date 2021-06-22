@@ -879,8 +879,8 @@ class WrapperEnv():
         patch_y = float(action_y) / self.coord_mp - 10
         patch_angle = float(action_angle) / self.angle_mp - np.pi/2
         data = self.original_env.step(patch_x, patch_y, patch_angle)
-        data['state_raster'] = self.canvas.astype(np.bool).astype(np.float32)
         data['patch_raster'] = self.draw(data['selected_patch'], (0,1,0), to_canvas=data['is_valid']).astype(np.bool).astype(np.float32)
+        data['state_raster'] = self.canvas.astype(np.bool).astype(np.float32)
 
         parking_score = data['n_patches'] / 32 # 0 ~ 1
         area_penalty = -(data['area_out_of_space'] + data['area_intersect_patches']) / self.patch_area # -1 ~ 0
