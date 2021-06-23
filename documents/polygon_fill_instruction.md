@@ -4,6 +4,7 @@
   <a href="#problem-description">Problem Description</a> •
   <a href="#manual">Manual</a> •
   <a href="#submission-guidelines">Submission Guidelines</a> •
+  <a href="#scoring-criteria">Scoring Criteria</a> •
   <a href="#appendix">Appendix</a>
 </p>
 
@@ -798,6 +799,25 @@ If we fail to reproduce your result described on answer document, and if there a
 <h3>How to Submit</h3>
 
 - Please submit your submission by e-mail(<iglee@spacewalk.tech>).
+
+<h2 align="center">Scoring Criteria</h2>
+
+- Problem solving process : 30%
+    - Problem solving process have to be scientific.
+    - The document should follow your problem solving process.
+- Scientific hypothesis : 25%
+    - The hypothesis have to be reasonable, and scientific.
+    - Your hypothesis should be described on the document.
+- Phenomenon analysis : 25%
+    - Once you validate your hypothesis with experiment, you can get the result.
+    - From result, observe phenomenon and analyze it.
+    - This analysis have to be described on the document.
+- Document & code quality : 15%
+    - Document and code should be written in a communicative manner.
+- Result performance : 5%
+    - We will score problem solving procedure more than the result.
+    - Given problem is not easy, hard to solve with limited time, so result of good performance is not mendatory.
+    - It's OK, if your agent doesn't seem to learn. We will find your strength from your document.
 
 <h2 align="center">Appendix</h2>
 
