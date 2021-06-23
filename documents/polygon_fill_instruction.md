@@ -806,6 +806,7 @@ If we fail to reproduce your result described on answer document, and if there a
     - Problem solving process have to be scientific.
     - The document should follow your problem solving process.
 - Scientific hypothesis : 25%
+    - It includes the expected characteristic of the problem, and why you choose the method.
     - The hypothesis have to be reasonable, and scientific.
     - Your hypothesis should be described on the document.
 - Phenomenon analysis : 25%
