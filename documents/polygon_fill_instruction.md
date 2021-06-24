@@ -852,7 +852,7 @@ class WrapperEnv():
         self.draw(self.original_env.space['shell'], (1,0,0))
         for hole in self.original_env.space['holes']:
             self.draw(hole, (-1,0,0))
-        return self.env.canvas.astype(np.bool).astype(np.float32)
+        return self.canvas.astype(np.bool).astype(np.float32)
 
     def select_space(self, idx):
         self.original_env.select_space(idx)
