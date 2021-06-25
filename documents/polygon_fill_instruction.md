@@ -851,7 +851,7 @@ class WrapperEnv():
         self.canvas = np.zeros((self.img_res,self.img_res,3), dtype=np.uint8)
         self.draw(self.original_env.space['shell'], (1,0,0))
         for hole in self.original_env.space['holes']:
-            self.draw(hole, (-1,0,0))
+            self.draw(hole, (0,0,0))
         return self.canvas.astype(np.bool).astype(np.float32)
 
     def select_space(self, idx):
@@ -862,7 +862,7 @@ class WrapperEnv():
         pts = np.around((arr + 10) * self.coord_mp).astype(np.int32)
         img = cv2.fillPoly(np.zeros(self.canvas.shape, dtype=np.uint8), [pts], color)
         if to_canvas:
-            self.canvas += img
+            cv2.fillPoly(self.canvas, [pts], color)
         return img
         
     @property
