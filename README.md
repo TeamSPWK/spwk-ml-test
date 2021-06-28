@@ -1,8 +1,7 @@
 <h1 align="center">Spacewalk ML Test</h1>
 <p align="center">Tests for spacewalk ML team applicants</p>
 
-<p align="center"><a href=""><img src="https://img.shields.io/badge/python-3.6|3.7|3.8-blue" alt="python" /></a>
-<p align="center"><a href="https://github.com/TeamSPWK/space-pool/releases"><img src="https://img.shields.io/badge/release-v0.0.0-blue" alt="release" /></a>
+<p align="center"><a href="https://github.com/TeamSPWK/spwk-ml-test/releases"><img src="https://img.shields.io/badge/release-v0.0.0-blue" alt="release" /></a>
 
 <p align="center">
   <a href="#description">Description</a> •
