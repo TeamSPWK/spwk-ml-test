@@ -782,6 +782,8 @@ If you think you will not be able to do it within the deadline, please notify us
     - Answer document should describe in detail how you solved the problem.
     - There is no restrictions on the format of the document, but the document should be sufficiently expressive of how you solved the problem.
     - Please add some images and performance properties of your final results on the document.
+    - Training graph have to be attached to the document.
+    - We will find not only your theoretical approach, but also your skills to produce proper training information, and to drive the learning with proper tuning.
 
 - Agent code
     - Agent(Problem solver) code have to be submitted.
@@ -802,7 +804,7 @@ If we fail to reproduce your result described on answer document, and if there a
 
 <h2 align="center">Scoring Criteria</h2>
 
-- Problem solving process : 30%
+- Problem solving process : 25%
     - Problem solving process have to be scientific.
     - The document should follow your problem solving process.
 - Scientific hypothesis : 25%
@@ -813,12 +815,12 @@ If we fail to reproduce your result described on answer document, and if there a
     - Once you validate your hypothesis with experiment, you can get the result.
     - From result, observe phenomenon and analyze it.
     - This analysis have to be described on the document.
-- Document & code quality : 15%
+- Document & code quality : 10%
     - Document and code should be written in a communicative manner.
-- Result performance : 5%
-    - We will score problem solving procedure more than the result.
-    - Given problem is not easy, hard to solve with limited time, so result of good performance is not mendatory.
-    - It's OK, if your agent doesn't seem to learn. We will find your strength from your document.
+- Result performance : 15%
+    - Spacewalk is a performance-oriented company, and we will score result performance as well as problem solving procedure.
+    - We will retrain your model, and check if the result is same as you described on the document.
+    - The criteria of result performance are "final performance", "sample efficiency" and "training stability".
 
 <h2 align="center">Appendix</h2>
 
