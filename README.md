@@ -3,7 +3,7 @@
 
 <p align="center">
   <a href="https://github.com/TeamSPWK/spwk-ml-test/releases"><img src="https://img.shields.io/badge/release-v0.0.0-blue" alt="release" /></a>
-  <a href="https://github.com/TeamSPWK/spwk-ml-test/LICENSE"><img src="https://img.shields.io/badge/license-GPL--v3-green" alt="env" /></a>
+  <a href="https://github.com/TeamSPWK/spwk-ml-test/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-GPL--v3-green" alt="env" /></a>
 <p align="center">
   <a href="#description">Description</a> •
   <a href="#install">Install</a> •
