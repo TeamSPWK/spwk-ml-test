@@ -779,7 +779,7 @@ If you think you will not be able to do it within the deadline, please notify us
 <h3>Submission List</h3>
 
 - Answer document
-    - Answer document should describe in detail how you solved the problem.
+    - Answer document should describe in detail how you solved the problem, and why you solved the problem like that.
     - There is no restrictions on the format of the document, but the document should be sufficiently expressive of how you solved the problem.
     - Please add some images and performance properties of your final results on the document.
     - Training graph have to be attached to the document.
